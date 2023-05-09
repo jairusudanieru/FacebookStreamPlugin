@@ -1,0 +1,4 @@
+name: FacebookStreamPlugin
+version: '${project.version}'
+main: plugin.facebookstreamplugin.FacebookStreamPlugin
+api-version: 1.19
