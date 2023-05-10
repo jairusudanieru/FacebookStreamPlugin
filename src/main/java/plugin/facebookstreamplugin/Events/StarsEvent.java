@@ -24,7 +24,8 @@ public class StarsEvent {
         String message = plugin.getConfig().getString("eventsMessages.stars");
         String consoleMessage = "[Facebook] " + name + " sent " + amount + " stars!";
         if (message == null || message.isEmpty()) return;
-        message = message.replace("&","§")
+        message = message
+                .replace("&","§")
                 .replace("%name%",name)
                 .replace("%amount%",amount);
 
@@ -32,7 +33,7 @@ public class StarsEvent {
         if (player != null && player.isOnline()) {
             if (logMessages) { Bukkit.getLogger().info(consoleMessage); }
             if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
-            ChatMessageType chatMessageType = messageType ? ChatMessageType.ACTION_BAR : ChatMessageType.CHAT;
+            ChatMessageType chatMessageType = messageType ? ChatMessageType.CHAT : ChatMessageType.ACTION_BAR;
             player.sendMessage(chatMessageType, new TextComponent(message));
         }
 

@@ -24,14 +24,15 @@ public class LikeEvent {
         String message = plugin.getConfig().getString("eventsMessages.like");
         String consoleMessage = "[Facebook] " + name + " liked the stream!";
         if (message == null || message.isEmpty()) return;
-        message = message.replace("&","§")
+        message = message
+                .replace("&","§")
                 .replace("%name%",name);
 
         //Sending the message to the player
         if (player != null && player.isOnline()) {
             if (logMessages) { Bukkit.getLogger().info(consoleMessage); }
             if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
-            ChatMessageType chatMessageType = messageType ? ChatMessageType.ACTION_BAR : ChatMessageType.CHAT;
+            ChatMessageType chatMessageType = messageType ? ChatMessageType.CHAT : ChatMessageType.ACTION_BAR;
             player.sendMessage(chatMessageType, new TextComponent(message));
         }
 
