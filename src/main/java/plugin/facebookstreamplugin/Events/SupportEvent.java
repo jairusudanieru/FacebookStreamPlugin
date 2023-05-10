@@ -32,26 +32,25 @@ public class SupportEvent {
                 .replace("%name%",name);
 
         //Sending the message to the player
-        if (player != null && player.isOnline()) {
-            if (logMessages) { Bukkit.getLogger().info(consoleMessage); }
-            if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
-            if (!messageType) {
-                BossBar bossBar = Bukkit.createBossBar(message, BarColor.WHITE, BarStyle.SEGMENTED_10);
-                bossBar.addPlayer(player);
-                bossBar.setProgress(1.0);
-                bossBar.setVisible(true);
-                Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-                    double progress = bossBar.getProgress();
-                    if (progress > 0.3333) {
-                        bossBar.setProgress(progress - 0.3333);
-                    } else {
-                        bossBar.setVisible(false);
-                        bossBar.removeAll();
-                    }
-                }, 20L, 20L);
-            } else {
-                player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
-            }
+        if (player == null || !player.isOnline()) { return; }
+        if (logMessages) { Bukkit.getLogger().info(consoleMessage); }
+        if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
+        if (!messageType) {
+            BossBar bossBar = Bukkit.createBossBar(message, BarColor.WHITE, BarStyle.SEGMENTED_10);
+            bossBar.addPlayer(player);
+            bossBar.setProgress(1.0);
+            bossBar.setVisible(true);
+            Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+                double progress = bossBar.getProgress();
+                if (progress > 0.3333) {
+                    bossBar.setProgress(progress - 0.3333);
+                } else {
+                    bossBar.setVisible(false);
+                    bossBar.removeAll();
+                }
+            }, 20L, 20L);
+        } else {
+            player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
         }
 
     }
