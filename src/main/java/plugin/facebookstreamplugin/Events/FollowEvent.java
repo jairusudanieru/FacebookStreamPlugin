@@ -4,6 +4,9 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,8 +35,23 @@ public class FollowEvent {
         if (player != null && player.isOnline()) {
             if (logMessages) { Bukkit.getLogger().info(consoleMessage); }
             if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
-            ChatMessageType chatMessageType = messageType ? ChatMessageType.CHAT : ChatMessageType.ACTION_BAR;
-            player.sendMessage(chatMessageType, new TextComponent(message));
+            if (!messageType) {
+                BossBar bossBar = Bukkit.createBossBar(message, BarColor.WHITE, BarStyle.SEGMENTED_10);
+                bossBar.addPlayer(player);
+                bossBar.setProgress(1.0);
+                bossBar.setVisible(true);
+                Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+                    double progress = bossBar.getProgress();
+                    if (progress > 0.3333) {
+                        bossBar.setProgress(progress - 0.3333);
+                    } else {
+                        bossBar.setVisible(false);
+                        bossBar.removeAll();
+                    }
+                }, 20L, 20L);
+            } else {
+                player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+            }
         }
 
     }

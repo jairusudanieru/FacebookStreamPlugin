@@ -6,7 +6,6 @@ For this to work, you need to use Streamlabs OBS to live stream videos in Facebo
 ## Config.yml
 
 ```yml
-
 #Change the socket token with your own token
 #This can be found in your Streamlabs dashboard
 #https://streamlabs.com/dashboard#/settings/api-settings
@@ -28,8 +27,8 @@ eventsMessages:
   support: "%name% became a supporter!"
 
 #Where to send the message
-#Set this to true, for serverChat
-#Set this to false, for actionBar
+#Set this to true, for actionBar
+#Set this to false, for bossBar
 messageType: true
 
 #Set this to true to log your events messages to the console
