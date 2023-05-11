@@ -18,6 +18,10 @@ eventsMessages:
   stars: "%name% sent %amount% stars!"
   support: "%name% became a supporter!"
 
+#Wheter to broadcast the message or not
+#Set this to true to override the messageType and broadcast the message to the server
+broadcastMessage: false
+
 #Where to send the message
 #Set this to true, for actionBar
 #Set this to false, for bossBar

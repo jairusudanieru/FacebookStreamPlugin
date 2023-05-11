@@ -3,6 +3,7 @@ package plugin.facebookstreamplugin.Utilities;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -19,6 +20,14 @@ public class SendAlert {
         if (streamerName == null) streamerName = "player";
         Player player =  Bukkit.getPlayerExact(streamerName);
         if (player == null || !player.isOnline()) return;
+
+        //Check if broadcastMessage option is enabled
+        boolean broadcastMessage = plugin.getConfig().getBoolean("broadcastMessage");
+        if (broadcastMessage) {
+            Server server = plugin.getServer();
+            server.broadcastMessage(message);
+            return;
+        }
 
         //Check if the playSound option is enabled
         boolean playSound = plugin.getConfig().getBoolean("playSound");
@@ -55,6 +64,5 @@ public class SendAlert {
         //Send the actionBar to the player
         player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
     }
-
 
 }
