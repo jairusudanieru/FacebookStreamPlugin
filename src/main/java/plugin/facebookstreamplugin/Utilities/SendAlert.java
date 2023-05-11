@@ -15,12 +15,6 @@ public class SendAlert {
 
     //Using the bossBar to send the event message
     public void sendBossBar(JavaPlugin plugin, String message) {
-        //Get the streamer name to which the alert will be sent
-        String streamerName = plugin.getConfig().getString("streamerName");
-        if (streamerName == null) streamerName = "player";
-        Player player =  Bukkit.getPlayerExact(streamerName);
-        if (player == null || !player.isOnline()) return;
-
         //Check if broadcastMessage option is enabled
         boolean broadcastMessage = plugin.getConfig().getBoolean("broadcastMessage");
         if (broadcastMessage) {
@@ -28,6 +22,12 @@ public class SendAlert {
             server.broadcastMessage(message);
             return;
         }
+
+        //Get the streamer name to which the alert will be sent
+        String streamerName = plugin.getConfig().getString("streamerName");
+        if (streamerName == null) streamerName = "player";
+        Player player =  Bukkit.getPlayerExact(streamerName);
+        if (player == null || !player.isOnline()) return;
 
         //Check if the playSound option is enabled
         boolean playSound = plugin.getConfig().getBoolean("playSound");
@@ -51,12 +51,6 @@ public class SendAlert {
 
     //Using the actionBar to send the event message
     public void sendActionBar(JavaPlugin plugin, String message) {
-        //Get the streamer name to which the alert will be sent
-        String streamerName = plugin.getConfig().getString("streamerName");
-        if (streamerName == null) streamerName = "player";
-        Player player =  Bukkit.getPlayerExact(streamerName);
-        if (player == null || !player.isOnline()) return;
-
         //Check if broadcastMessage option is enabled
         boolean broadcastMessage = plugin.getConfig().getBoolean("broadcastMessage");
         if (broadcastMessage) {
@@ -64,6 +58,12 @@ public class SendAlert {
             server.broadcastMessage(message);
             return;
         }
+
+        //Get the streamer name to which the alert will be sent
+        String streamerName = plugin.getConfig().getString("streamerName");
+        if (streamerName == null) streamerName = "player";
+        Player player =  Bukkit.getPlayerExact(streamerName);
+        if (player == null || !player.isOnline()) return;
 
         //Check if the playSound option is enabled
         boolean playSound = plugin.getConfig().getBoolean("playSound");
