@@ -57,6 +57,14 @@ public class SendAlert {
         Player player =  Bukkit.getPlayerExact(streamerName);
         if (player == null || !player.isOnline()) return;
 
+        //Check if broadcastMessage option is enabled
+        boolean broadcastMessage = plugin.getConfig().getBoolean("broadcastMessage");
+        if (broadcastMessage) {
+            Server server = plugin.getServer();
+            server.broadcastMessage(message);
+            return;
+        }
+
         //Check if the playSound option is enabled
         boolean playSound = plugin.getConfig().getBoolean("playSound");
         if (playSound) { player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 20f, 1f); }
