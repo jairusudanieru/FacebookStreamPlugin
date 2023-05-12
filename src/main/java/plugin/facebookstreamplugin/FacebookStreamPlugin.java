@@ -8,13 +8,22 @@ public final class FacebookStreamPlugin extends JavaPlugin {
     FacebookClass facebookClass = new FacebookClass();
     String token = getConfig().getString("socketToken");
 
+    public void checkToken() {
+        if (token == null || token.isEmpty() || token.equalsIgnoreCase("yourSocketToken")) {
+            Bukkit.getLogger().info("[FacebookStreamPlugin] Please use your proper token!");
+            Bukkit.getLogger().info("[FacebookStreamPlugin] Plugin successfully Disabled!");
+            Bukkit.getPluginManager().disablePlugin(this);
+        } else {
+            facebookClass.onFacebookEvent(this);
+            Bukkit.getLogger().info("[FacebookStreamPlugin] Plugin successfully Enabled!");
+        }
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
         saveDefaultConfig();
-        if (token == null || token.isEmpty() || token.equalsIgnoreCase("yourSocketToken")) return;
-        facebookClass.onFacebookEvent(this);
-        Bukkit.getLogger().info("[FacebookStreamPlugin] Plugin successfully Enabled!");
+        checkToken();
     }
 
     @Override
