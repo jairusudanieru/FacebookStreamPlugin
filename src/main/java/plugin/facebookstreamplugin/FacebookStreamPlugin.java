@@ -11,7 +11,6 @@ public final class FacebookStreamPlugin extends JavaPlugin {
     public void checkToken() {
         if (token == null || token.isEmpty() || token.equalsIgnoreCase("yourSocketToken")) {
             Bukkit.getLogger().info("[FacebookStreamPlugin] Please use your proper token!");
-            Bukkit.getLogger().info("[FacebookStreamPlugin] Plugin successfully Disabled!");
             Bukkit.getPluginManager().disablePlugin(this);
         } else {
             facebookClass.onFacebookEvent(this);
