@@ -2,6 +2,7 @@ package plugin.facebookstreamplugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.facebookstreamplugin.Utilities.FacebookClass;
 
 public final class FacebookStreamPlugin extends JavaPlugin {
 

@@ -1,4 +1,4 @@
-package plugin.facebookstreamplugin;
+package plugin.facebookstreamplugin.Utilities;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
